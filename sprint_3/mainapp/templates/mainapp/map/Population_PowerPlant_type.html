@@ -17,7 +17,29 @@
     <link href="{% static 'mainapp/css/sb-admin-2.min.css' %}" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
+
+    <!--  날짜 슬라이더  -->
+    <link rel="stylesheet" href="{% static 'mainapp/css/rSlider.min.css' %}" >
+    <script src="{% static 'mainapp/js/rSlider.min.js' %} "></script>
+    <style>
+    .chart-area {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .chart-area > div {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+    }
+
+    .chart-area iframe {
+        width: 100%;
+        height: 100%;
+    }
+    </style>
 </head>
 <body id="page-top">
     <div id="wrapper">
@@ -97,218 +119,210 @@
                 <hr class="sidebar-divider">
             </ul>
         <!-- End of Sidebar -->
-
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-
-            <!-- Main Content -->
-            <div id="content">
-
-                <!-- Topbar -->
-                <!-- End of Topbar -->
-<!-- 3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333 -->
-                <!-- Begin Page Content -->
-                <div class="row">
-
-                    <!-- Area Chart -->
-                    <!-- <div class="col-xl-8 col-lg-7"> -->
-                    <div class="col-xl-6 col-lg-7">
-                        <div class="card shadow mb-4">
-                            <!-- Card Header - Dropdown -->
-                            <div
-                                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
-                                <div class="dropdown no-arrow">
-                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                        aria-labelledby="dropdownMenuLink">
-                                        <div class="dropdown-header">Dropdown Header:</div>
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Card Body -->
-                            <div class="card-body">
-                                <!-- 차트 그리기 ####################################################################################-->
-                                <div class="chart-area mb-4">
-                                    <div style="display: block; width: 100%;">
-                                        {{ map_html | safe }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pie Chart -->
-                    <!-- <div class="col-xl-4 col-lg-5"> -->
-                    <div class="col-xl-6 col-lg-6">
-                        <div class="card shadow mb-4">
-                            <!-- Card Header - Dropdown -->
-                            <div
-                                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
-                                <div class="dropdown no-arrow">
-                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                        aria-labelledby="dropdownMenuLink">
-                                        <div class="dropdown-header">Dropdown Header:</div>
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Card Body -->
-                            <div class="card-body">
-                                <!-- 차트 그리기 ####################################################################################-->
-                                <div class="chart-area mb-4">
-                                    <div style="display: block; text-align: center;">
-                                        <img src="{% static 'mainapp/data_graph_img/fig.png' %}" style="width:80%;">
-                                    </div>                                      
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <div id="content">
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <!-- Page Heading -->
+                <br/>
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">발전소 종료와 인구의 상관관계 분석</h1>
                 </div>
+                <!-- Content Wrapper -->
+                <div id="content-wrapper" class="d-flex flex-column">
 
-                <div class="container-fluid">
-                    <div class="row">
+                    <!-- Main Content -->
+                    <div id="content">
 
-                        <div class="col-lg-6">
-
-                            <!-- Default Card Example -->
-                            <div class="card mb-4">
-                                <div class="card-header">
-                                    Default Card Example
-                                </div>
-                                <div class="card-body">
-                                    This card uses Bootstrap's default styling with no utility classes added. Global
-                                    styles are the only things modifying the look and feel of this default card example.
+                        <!-- Topbar -->
+                        <!-- End of Topbar -->
+            <!-- 3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333 -->
+                        <!-- Begin Page Content -->
+                        <div class="row">
+                            <!-- <div class="col-xl-8 col-lg-7"> -->
+                            <div class="col-xl-6 col-lg-7">
+                                <div class="card shadow mb-4">
+                                    <!-- Card Header - Dropdown -->
+                                    <div
+                                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <h6 class="m-0 font-weight-bold text-primary">Earnings Overview
+                                        </h6>
+                                        <div class="dropdown no-arrow">
+                                            
+                                        </div>
+                                    </div>
+                                    <!-- Card Body -->
+                                    <div class="card-body">
+                                        <div class="chart-area">
+                                            <div style="display: block; width: 100%; height: 100%;">
+                                                {{ map_html | safe }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                      
                                 </div>
                             </div>
 
-                            <!-- Basic Card Example -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Basic Card Example</h6>
-                                </div>
-                                <div class="card-body">
-                                    The styling for this basic card example is created by using default Bootstrap
-                                    utility classes. By using utility classes, the style of the card component can be
-                                    easily modified with no need for any custom CSS!
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="col-lg-6">
-
-                            <!-- Dropdown Card Example -->
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Dropdown Card Example</h6>
-                                    <div class="dropdown no-arrow">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                            aria-labelledby="dropdownMenuLink">
-                                            <div class="dropdown-header">Dropdown Header:</div>
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Something else here</a>
+                            <!-- Pie Chart -->
+                            <!-- <div class="col-xl-4 col-lg-5"> -->
+                            <div class="col-xl-6 col-lg-6">
+                                <div class="card shadow mb-4">
+                                    <!-- Card Header - Dropdown -->
+                                    <div
+                                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+                                        <div class="dropdown no-arrow">
+                                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                                aria-labelledby="dropdownMenuLink">
+                                                <div class="dropdown-header">Dropdown Header:</div>
+                                                <a class="dropdown-item" href="#">Action</a>
+                                                <a class="dropdown-item" href="#">Another action</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="#">Something else here</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Card Body -->
+                                    <div class="card-body">
+                                        <!-- 차트 그리기 ####################################################################################-->
+                                        <div class="chart-area ">
+                                            <div style="display: block; text-align: center;">
+                                                <img src="{% static 'mainapp/data_graph_img/fig.png' %}"  style="display: block; width: 100%; height: 100%;">
+                                            </div>                                      
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    Dropdown menus can be placed in the card header in order to extend the functionality
-                                    of a basic card. In this dropdown card example, the Font Awesome vertical ellipsis
-                                    icon in the card header can be clicked on in order to toggle a dropdown menu.
-                                </div>
                             </div>
-
-                            <!-- Collapsable Card Example -->
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Accordion -->
-                                <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse"
-                                    role="button" aria-expanded="true" aria-controls="collapseCardExample">
-                                    <h6 class="m-0 font-weight-bold text-primary">Collapsable Card Example</h6>
-                                </a>
-                                <!-- Card Content - Collapse -->
-                                <div class="collapse show" id="collapseCardExample">
-                                    <div class="card-body">
-                                        This is a collapsable card example using Bootstrap's built in collapse
-                                        functionality. <strong>Click on the card header</strong> to see the card body
-                                        collapse and expand!
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
 
+
+                            <div class="row">
+
+                                <div class="col-lg-6">
+
+                                    <!-- Default Card Example -->
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            <h6 class="m-0 font-weight-bold text-primary">folium 년도로 조절하기</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <!-- ######################################################## -->
+                                            <div id="sampleSlider"></div>
+                                            <!-- <div id="slider-value"></div> -->
+
+                                        </div>
+                                    </div>
+
+                                    <!-- Basic Card Example -->
+                                    <div class="card shadow mb-4">
+                                        <div class="card-header py-3">
+                                            <h6 class="m-0 font-weight-bold text-primary">Basic Card Example</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <tr class="row">
+                                                <td class="label">onChange(callback)</td>
+                                                <td>the callback function argument returns current selected values e.g  
+                                                    <br>
+                                                    <strong>mySlider.onChange(function (values) { // argument values represents current values });</strong></td>
+                                            </tr>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-lg-6">
+
+                                    <!-- Dropdown Card Example -->
+                                    <div class="card shadow mb-4">
+                                        <!-- Card Header - Dropdown -->
+                                        <div
+                                            class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                            <h6 class="m-0 font-weight-bold text-primary">Dropdown Card Example</h6>
+                                            <div class="dropdown no-arrow">
+                                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                                    aria-labelledby="dropdownMenuLink">
+                                                    <div class="dropdown-header">Dropdown Header:</div>
+                                                    <a class="dropdown-item" href="#">Action</a>
+                                                    <a class="dropdown-item" href="#">Another action</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item" href="#">Something else here</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Card Body -->
+                                        <div class="card-body">
+                                            Dropdown menus can be placed in the card header in order to extend the functionality
+                                            of a basic card. In this dropdown card example, the Font Awesome vertical ellipsis
+                                            icon in the card header can be clicked on in order to toggle a dropdown menu.
+                                        </div>
+                                    </div>
+
+                                    <!-- Collapsable Card Example -->
+                                    <div class="card shadow mb-4">
+                                        <!-- Card Header - Accordion -->
+                                        <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse"
+                                            role="button" aria-expanded="true" aria-controls="collapseCardExample">
+                                            <h6 class="m-0 font-weight-bold text-primary">Collapsable Card Example</h6>
+                                        </a>
+                                        <!-- Card Content - Collapse -->
+                                        <div class="collapse show" id="collapseCardExample">
+                                            <div class="card-body">
+                                                This is a collapsable card example using Bootstrap's built in collapse
+                                                functionality. <strong>Click on the card header</strong> to see the card body
+                                                collapse and expand!
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        <!-- </div> -->
+
+
                     </div>
+                    <!-- End of Footer -->
 
                 </div>
-                <!-- /.container-fluid -->
 
             </div>
-            <!-- End of Footer -->
-
         </div>
         <!-- End of Content Wrapper -->
 
     </div>
     <!-- End of Page Wrapper -->
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
 
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    
+
+    <script>
+        var mySlider = new rSlider({
+            target: '#sampleSlider',
+            values: [2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015],
+            range: false,
+            tooltip: false,
+            scale: true,
+            labels: true,
+            onChange: function (vals){
+                //alert(vals)
+                url = "/update_view/vals=?" + vals;
+                location.href = url;
+            }
+        });
+    </script>
+    <script></script>
 
 
 
 
-
-
-
-
-
+        
 
         <!-- Bootstrap core JavaScript-->
         <script type="text/javascript"
@@ -322,10 +336,7 @@
         <!-- Custom scripts for all pages-->
         <script  src="{% static 'mainapp/js/sb-admin-2.min.js' %}"> </script>
         <!-- Page level plugins -->
-        <script  src="{% static 'mainapp/vendor/chart.js/Chart.min.js' %}"></script>
         <!-- Page level custom scripts -->
-        <script  src="{% static 'mainapp/js/demo/chart-area-demo.js' %}"> </script>
-        <script src="{% static 'mainapp/js/demo/chart-pie-demo.js' %}"></script>
-
+        <!-- 날짜 슬라이더 -->
 </body>
 </html>
