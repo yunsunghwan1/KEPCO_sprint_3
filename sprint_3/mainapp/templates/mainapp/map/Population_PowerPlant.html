@@ -17,7 +17,29 @@
     <link href="{% static 'mainapp/css/sb-admin-2.min.css' %}" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
+
+    <!--  날짜 슬라이더  -->
+    <link rel="stylesheet" href="{% static 'mainapp/css/rSlider.min.css' %}" >
+    <script src="{% static 'mainapp/js/rSlider.min.js' %} "></script>
+    <style>
+    .chart-area {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .chart-area > div {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+    }
+
+    .chart-area iframe {
+        width: 100%;
+        height: 100%;
+    }
+    </style>
 </head>
 <body id="page-top">
     <div id="wrapper">
@@ -103,7 +125,7 @@
                 <!-- Page Heading -->
                 <br/>
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">발전소 계수와 상관관계 분석</h1>
+                    <h1 class="h3 mb-0 text-gray-800">발전소 종료와 인구의 상관관계 분석</h1>
                 </div>
                 <!-- Content Wrapper -->
                 <div id="content-wrapper" class="d-flex flex-column">
@@ -117,36 +139,26 @@
                         <!-- Begin Page Content -->
                         <div class="row">
                             <!-- <div class="col-xl-8 col-lg-7"> -->
-                            <div class="col-xl-6">
+                            <div class="col-xl-6 col-lg-7">
                                 <div class="card shadow mb-4">
                                     <!-- Card Header - Dropdown -->
                                     <div
                                         class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                        <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+                                        <h6 class="m-0 font-weight-bold text-primary">Earnings Overview
+                                        </h6>
                                         <div class="dropdown no-arrow">
-                                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                                aria-labelledby="dropdownMenuLink">
-                                                <div class="dropdown-header">Dropdown Header:</div>
-                                                <a class="dropdown-item" href="#">Action</a>
-                                                <a class="dropdown-item" href="#">Another action</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="#">Something else here</a>
-                                            </div>
+                                            
                                         </div>
                                     </div>
                                     <!-- Card Body -->
                                     <div class="card-body">
-                                        <!-- 차트 그리기 ####################################################################################-->
-                                        <div class="chart-area mb-4">
-                                            <div style="display: block; width: 100%;">
+                                        <div class="chart-area">
+                                            <div style="display: block; width: 100%; height: 100%;">
                                                 {{ map_html | safe }}
                                             </div>
                                         </div>
                                     </div>
+                                      
                                 </div>
                             </div>
 
@@ -176,9 +188,9 @@
                                     <!-- Card Body -->
                                     <div class="card-body">
                                         <!-- 차트 그리기 ####################################################################################-->
-                                        <div class="chart-area mb-4">
+                                        <div class="chart-area ">
                                             <div style="display: block; text-align: center;">
-                                                <img src="{% static 'mainapp/data_graph_img/fig.png' %}" style="width:80%;">
+                                                <img src="{% static 'mainapp/data_graph_img/fig.png' %}"  style="display: block; width: 100%; height: 100%;">
                                             </div>                                      
                                         </div>
                                     </div>
@@ -194,11 +206,13 @@
                                     <!-- Default Card Example -->
                                     <div class="card mb-4">
                                         <div class="card-header">
-                                            Default Card Example
+                                            <h6 class="m-0 font-weight-bold text-primary">folium 년도로 조절하기</h6>
                                         </div>
                                         <div class="card-body">
-                                            This card uses Bootstrap's default styling with no utility classes added. Global
-                                            styles are the only things modifying the look and feel of this default card example.
+                                            <!-- ######################################################## -->
+                                            <div id="sampleSlider" ></div>
+                                            <!-- <div id="slider-value"></div> -->
+
                                         </div>
                                     </div>
 
@@ -208,9 +222,12 @@
                                             <h6 class="m-0 font-weight-bold text-primary">Basic Card Example</h6>
                                         </div>
                                         <div class="card-body">
-                                            The styling for this basic card example is created by using default Bootstrap
-                                            utility classes. By using utility classes, the style of the card component can be
-                                            easily modified with no need for any custom CSS!
+                                            <tr class="row">
+                                                <td class="label">onChange(callback)</td>
+                                                <td>the callback function argument returns current selected values e.g  
+                                                    <br>
+                                                    <strong>mySlider.onChange(function (values) { // argument values represents current values });</strong></td>
+                                            </tr>
                                         </div>
                                     </div>
 
@@ -285,12 +302,41 @@
 
 
 
+    <script>
+        cnt = 0;
+        var urlParams = new URLSearchParams(window.location.search);
+		var values = {{input_data}};
+        var mySlider = new rSlider({
+            
+            target: '#sampleSlider',
+            values: [2012, 2013, 2014, 2015,2016, 2017],
+            range: false,
+            tooltip: false,
+            scale: true,
+            labels: true,
+            set: [values],
+            
+            onChange: function (vals){
+                if (cnt >0){
+                    // alert(vals)
+                    url = "/Population_PowerPlant/?vals=" + vals;
+                    // url = url +"&values="+values;
+                    // alert(url)
+                    location.href = url;
+                }
+                else{
+                    cnt +=1
+                }
+                
+            }
+        });
+    </script>
 
 
 
 
 
-
+        
 
         <!-- Bootstrap core JavaScript-->
         <script type="text/javascript"
@@ -304,10 +350,7 @@
         <!-- Custom scripts for all pages-->
         <script  src="{% static 'mainapp/js/sb-admin-2.min.js' %}"> </script>
         <!-- Page level plugins -->
-        <script  src="{% static 'mainapp/vendor/chart.js/Chart.min.js' %}"></script>
         <!-- Page level custom scripts -->
-        <script  src="{% static 'mainapp/js/demo/chart-area-demo.js' %}"> </script>
-        <script src="{% static 'mainapp/js/demo/chart-pie-demo.js' %}"></script>
-
+        <!-- 날짜 슬라이더 -->
 </body>
 </html>
