@@ -142,7 +142,8 @@
                                 <div class="card-body">
                                     <!-- 차트 그리기 ####################################################################################-->
                                     <div class="chart-area">
-                                        <canvas id="lineChart" style="display: block; width: 100%; height: 100%;"></canvas>
+                                        {% comment %} <canvas id="lineChart" style="display: block; width: 100%; height: 100%;"></canvas> {% endcomment %}
+                                        <div id="chartContainer" style="height: 100%; width: 100%;"></div>
                                     </div>
                                 </div>
                             </div>
@@ -233,8 +234,106 @@
                 },
             });
         });
-        </script>
-        
+    </script>
+    <script>
+        window.onload = function () {
+
+        var chart = new CanvasJS.Chart("chartContainer", {
+            animationEnabled: true,
+            title:{
+                text: "전력 시각화, 2020"
+            },	
+            axisY: {
+                title: "발전량(TW)",
+                titleFontColor: "#4F81BC",
+                lineColor: "#4F81BC",
+                labelFontColor: "#4F81BC",
+                tickColor: "#4F81BC"
+            },
+            axisY2: {
+                title: "전력사용량(TW)",
+                titleFontColor: "#C0504E",
+                lineColor: "#C0504E",
+                labelFontColor: "#C0504E",
+                tickColor: "#C0504E"
+            },	
+            toolTip: {
+                shared: true
+            },
+            legend: {
+                cursor:"pointer",
+                itemclick: toggleDataSeries
+            },
+            data: [{
+                type: "column",
+                name: "지역별 발전량(TW)",
+                legendText: "지역별 전력 사용량",
+                showInLegend: true, 
+                dataPoints:[
+                    { label: "서울시", y: 45787926 /1000000 },
+                    { label: "부산시", y: 20503969/1000000 },
+                    { label: "대구시", y: 14758568/1000000 },
+                    { label: "인천시", y: 23638582/1000000 },
+                    { label: "광주시", y: 8531108/1000000 },
+                    { label: "대전시", y: 9405220/1000000 },
+                    
+                    { label: "울산시", y: 33157834 /1000000},
+                    { label: "세종시", y: 3393222/1000000 },
+                    { label: "경기도", y: 124688963/1000000 },
+                    { label: "강원도", y: 16120066/1000000},
+
+                    { label: "충청북도", y: 26901894/1000000 },
+                    { label: "충청남도", y: 50422732/1000000 },
+                    { label: "전라북도", y: 20538911/1000000 },
+                    { label: "전라남도", y: 30973974 /1000000},
+                    { label: "경상북도", y: 41001626/1000000 },
+                    { label: "경상남도", y: 34069974/1000000 },
+                    { label: "제주도", y: 5373287/1000000 }
+                ]
+            },
+            {
+                type: "column",	
+                name: "지역별 발전량(TW)",
+                legendText: "지역별 발전량",
+                axisYType: "secondary",
+                showInLegend: true,
+                dataPoints:[
+                    { label: "서울시", y: 5122176/1000000 },
+                    { label: "부산시", y: 40647380/1000000},
+                    { label: "대구시", y: 2568644 /1000000},
+                    { label: "인천시", y: 57135627/1000000 },
+                    { label: "광주시", y: 167834/1000000 },
+                    { label: "대전시", y: 167834/1000000 },
+                    
+                    { label: "울산시", y: 29808674/1000000 },
+                    { label: "세종시", y: 167834/1000000 },
+                    { label: "경기도", y: 72512661/1000000 },
+                    { label: "강원도", y: 27875047/1000000 },
+
+                    { label: "충청북도", y: 2221149/1000000 },
+                    { label: "충청남도", y: 114103936 /1000000},
+                    { label: "전라북도", y: 12599529 /1000000},
+                    { label: "전라남도", y: 58217106/1000000 },
+                    { label: "경상북도", y: 58217106/1000000 },
+                    { label: "경상남도", y: 35332874/1000000 },
+                    { label: "제주도", y: 3821827 /1000000}
+                ]
+            }]
+        }); 
+        chart.render();
+
+            function toggleDataSeries(e) {
+                if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                    e.dataSeries.visible = false;
+                }
+                else {
+                    e.dataSeries.visible = true;
+                }
+                chart.render();
+            }
+
+        }
+    </script>    
     <!-- pie 차트 ################################################################# -->
     <script>
         $(document).ready(function() {
@@ -291,6 +390,7 @@
 
 
 
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <!-- ################################## -->
 
 
