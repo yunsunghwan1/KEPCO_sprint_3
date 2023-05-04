@@ -154,7 +154,7 @@
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">한국발전 비율(2020년)</h6>
                                     <div class="dropdown no-arrow">
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -243,25 +243,14 @@
                 type: "pie",
                 data: {
                     labels: [
-                        "Monday",
-                        "Tuesday",
-                        "Wednesday",
-                        "하이",
-                        "Friday   ",
-                        "Saturday",
-                        "Sunday",
+                        '일반수력','양수','소수력','무연탄','유연탄','중유','LNG','유류','원자력','신재생','집단','내연력','기타'
                     ],
                     datasets: [
                         {
-                            label: "work load",
-                            data: [2, 9, 3, 17, 6, 3, 7],
-                            backgroundColor: "rgba(153,205,1,0.6)",
-                        },
-                        {
-                            label: "free hours",
-                            data: [2, 2, 5, 5, 2, 1, 10],
-                            backgroundColor: "rgba(155,153,10,0.6)",
-                        },
+                            label: "에너지 종류",
+                            data: [3206.0,3271.0,671.0,2094.0,185241.0,1504.0,111690.0,69.0,160184.0,31057.0,45567.0,405.0,4940.0],
+                             backgroundColor: ["#FF8C00", "#FF69B4", "#FFCE56", "#FF6384", "#00FF00", "#00BFFF", "#36A2EB", "#9400D3", "#ADFF2F", "#DC143C", "#BA55D3", "#FFD700", "#00FFFF"],
+                        }
                     ],
                 },
                 options: {
